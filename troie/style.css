@@ -1,0 +1,22 @@
+
+body,.container,nav{
+    display: flex;
+}
+body{
+    justify-content: center;
+    font-family: arial;
+}
+.container{
+    width: 746px;
+    flex-direction: column;
+    border-top:4px solid #101214;
+    align-items: center;
+}
+header{width: 500px;margin-bottom: 32px;}
+nav{justify-content: flex-end;}
+.contant{display: inline-flex;justify-content: center;}
+article{width: 335px;margin-right: 24px;}
+aside{width: 140px;}
+nav a{padding: 0 16px;line-height: 32px;}
+
+header img{border-radius: 50%;}
