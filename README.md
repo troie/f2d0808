@@ -27,7 +27,7 @@
 ---
 ## HTML Site Map
 網站地圖 (Sitemap) 是一個文件，通常是 XML 格式，用於列出網站的所有頁面，並告訴搜尋引擎網站的內容結構。這有助於搜尋引擎更有效地抓取和索引網站的頁面。網站地圖可以包含有關每個 URL 的信息，如最後修改日期、變更頻率和相對於其他頁面的優先級。
-![site map](image/sitemap.png)
+![site map](troie/image/sitemap.png)
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -517,7 +517,7 @@ HTML5 語意化元素，用來表示與頁面**主內容相關的次要內容或
 
 ---
 ### 作業參考 index.html
-![workshop](image/YourName_CV.png)
+![workshop](troie/image/YourName_CV.png)
 ```
 <div class="container">
     <header>
@@ -1278,7 +1278,7 @@ HTML 中的 `<table>` 元素用來表示表格數據，允許在網頁中顯示�
 - **避免表格佈局**：盡量避免使用表格進行佈局，這樣做會讓 HTML 結構更加複雜，且不利於 SEO 和可訪問性。建議使用 CSS Flexbox 或 Grid 來進行佈局。
 
 #### 試試看
-![table](image/table.png)
+![table](troie/image/table.png)
 
 ---
 ### 表單 `<form>`
@@ -1570,4 +1570,4 @@ HTML 提供了基本的表單驗證功能，可以使用以下屬性：
 
 ##### 試試看
 
-![form](image/form.png)
+![form](troie/image/form.png)
