@@ -1,4 +1,4 @@
-# Lccnet HTML
+# Lccnet HTML & CSS 初探
 
 ## 課程相關連結
 - [我的網站](https://iam.troie.fun)
@@ -8,6 +8,7 @@
 - [github](https://github.com/)
 - [github desktop](https://github.com/apps/desktop)
 - [同步程式碼](https://github.com/maolahdesign/f2d0808)
+- [個人網頁設計檔案](https://www.figma.com/design/r1hQiKxBAfivjwxAHC3ykC/CV-%2F-Resume-(Community)?node-id=0-1&t=eWBY9H4DIPtltWU7-1)
 
 
 ## 我的第一支程式 index.html
@@ -1571,3 +1572,878 @@ HTML 提供了基本的表單驗證功能，可以使用以下屬性：
 ##### 試試看
 
 ![form](troie/image/form.png)
+
+
+---
+
+## 我的第一支 CSS
+在 HTML 文件中連結 CSS（串接樣式表）可以用來控制網頁的外觀和佈局。以下是幾種常見的方式來連結 CSS 文件或內嵌 CSS 樣式到 HTML 中。
+
+### 行內 CSS
+直接在 HTML 標籤中使用 `style` 屬性來定義樣式。這種方法通常只用於少量的樣式定義，不推薦大量使用。
+
+#### 範例：
+
+```html
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的網頁</title>
+</head>
+<body>
+    <h1 style="color: #007BFF;">歡迎來到我的網站</h1>
+    <p style="font-size: 16px; line-height: 1.5;">這是範例內容。</p>
+</body>
+</html>
+```
+
+### 內嵌式 CSS
+將 CSS 直接寫在 HTML 文件中的 `<style>` 標籤內。
+
+#### 範例：
+
+```html
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的網頁</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        h1 {
+            color: #007BFF;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <h1>歡迎來到我的網站</h1>
+    <p>這是範例內容。</p>
+</body>
+</html>
+```
+
+### 外部連結 CSS 文件
+這是最常用的方式，將一個獨立的 CSS 文件連結到 HTML 文件中。
+
+#### 步驟：
+1. 創建一個 `.css` 文件（例如 `styles.css`）。
+2. 在你的 HTML 文件的 `<head>` 部分中使用 `<link>` 標籤連結該 CSS 文件。
+
+#### 範例：
+
+```html
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的網頁</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>歡迎來到我的網站</h1>
+    <p>這是範例內容。</p>
+</body>
+</html>
+```
+
+在這個範例中，`styles.css` 文件將包含控制 HTML 文件樣式的所有 CSS 規則。
+
+#### `styles.css` 的範例內容：
+
+```css
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+h1 {
+    color: #007BFF;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+```
+
+### 引入多個 CSS 文件
+
+你可以在 `<head>` 中連結多個 CSS 文件，它們會按照引入的順序被應用，後者會覆蓋前者的相同樣式規則。
+
+#### 範例：
+
+```html
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的網頁</title>
+    <link rel="stylesheet" href="reset.css"> <!-- 用於重置默認樣式 -->
+    <link rel="stylesheet" href="main.css">  <!-- 主樣式表 -->
+</head>
+<body>
+    <h1>歡迎來到我的網站</h1>
+    <p>這是範例內容。</p>
+</body>
+</html>
+```
+
+### 總結
+
+- **外部 CSS**：最常用，將樣式與結構分離，便於維護。
+- **內嵌 CSS**：適合少量樣式，通常用於特定頁面的樣式控制。
+- **行內 CSS**：只用於非常小範圍的樣式定義，不推薦大範圍使用。
+
+你可以根據具體需求選擇合適的方式來連結 CSS，使你的網頁設計更具一致性和美觀性。
+
+---
+## CSS 盒模型（Box Model）
+
+CSS 中設計和佈局的基礎概念之一，幾乎所有的 HTML 元素都會按照盒模型的規則來渲染。理解盒模型對於控制元素的大小、邊距、內距以及邊框至關重要。
+
+### 盒模型的構成
+
+CSS 盒模型可以分為四個部分，從內到外依次是：
+
+1. **內容區（Content）**：元素的實際內容，例如文本、圖片或其他內嵌元素。
+2. **內邊距（Padding）**：內容區與邊框之間的空間。內邊距不會影響元素的背景顏色，背景會延伸到內邊距區域。
+3. **邊框（Border）**：包圍內容和內邊距的邊線。邊框的寬度、樣式和顏色可以通過 CSS 屬性設置。
+4. **外邊距（Margin）**：元素與相鄰元素之間的空間。外邊距是透明的，會影響元素之間的距離。
+
+### 盒模型結構圖
+![form](troie/image/box_model.png)
+
+### 盒模型的 CSS 屬性
+
+#### 1. **`width` 和 `height`**
+   - 設置內容區的寬度和高度，不包括內邊距、邊框和外邊距。
+   - 範例：
+     ```css
+     div {
+         width: 200px;
+         height: 100px;
+     }
+     ```
+
+#### 2. **`padding`**
+   - 設置內邊距，可以單獨為上、右、下、左設置，也可以統一設置四邊的內邊距。
+   - 範例：
+     ```css
+     div {
+         padding: 10px; /* 所有方向都是 10px */
+         padding-top: 20px; /* 上方內邊距 20px */
+         padding-right: 15px; /* 右方內邊距 15px */
+         padding-bottom: 10px; /* 下方內邊距 10px */
+         padding-left: 5px; /* 左方內邊距 5px */
+     }
+     ```
+
+#### 3. **`border`**
+   - 設置邊框的寬度、樣式和顏色。
+   - 範例：
+     ```css
+     div {
+         border: 2px solid #000; /* 寬度 2px，實線，黑色 */
+         border-radius: 5px; /* 圓角邊框 */
+     }
+     ```
+
+#### 4. **`margin`**
+   - 設置外邊距，可以單獨為上、右、下、左設置，也可以統一設置四邊的外邊距。
+   - 範例：
+     ```css
+     div {
+         margin: 10px; /* 所有方向都是 10px */
+         margin-top: 20px; /* 上方外邊距 20px */
+         margin-right: 15px; /* 右方外邊距 15px */
+         margin-bottom: 10px; /* 下方外邊距 10px */
+         margin-left: 5px; /* 左方外邊距 5px */
+     }
+     ```
+
+### 計算元素的實際大小
+
+- 元素的實際寬度 = `width` + `padding-left` + `padding-right` + `border-left` + `border-right` + `margin-left` + `margin-right`
+- 元素的實際高度 = `height` + `padding-top` + `padding-bottom` + `border-top` + `border-bottom` + `margin-top` + `margin-bottom`
+
+#### 範例：
+
+```css
+div {
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+    border: 5px solid #000;
+    margin: 20px;
+}
+```
+
+- 實際寬度 = 200px（`width`） + 10px（`padding-left`） + 10px（`padding-right`） + 5px（`border-left`） + 5px（`border-right`） + 20px（`margin-left`） + 20px（`margin-right`） = 270px
+- 實際高度 = 100px（`height`） + 10px（`padding-top`） + 10px（`padding-bottom`） + 5px（`border-top`） + 5px（`border-bottom`） + 20px（`margin-top`） + 20px（`margin-bottom`） = 170px
+
+### Box-sizing 屬性
+
+CSS 提供了 `box-sizing` 屬性來改變盒模型的計算方式：
+
+- **`box-sizing: content-box;`** (默認值)
+  - 只計算 `width` 和 `height` 作為內容區的尺寸，內邊距和邊框不包括在內。
+  
+- **`box-sizing: border-box;`**
+  - `width` 和 `height` 包括內容區、內邊距和邊框，這樣可以更容易控制元素的總寬度和高度。
+
+#### 範例：
+
+```css
+div {
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+    border: 5px solid #000;
+    box-sizing: border-box; /* 寬高包括內邊距和邊框 */
+}
+```
+
+在這個例子中，元素的實際寬度和高度將始終是 200px 和 100px，不會因為內邊距和邊框而增加。
+
+### 總結
+
+CSS 盒模型是一個非常重要的概念，它決定了元素的佈局方式和尺寸計算方法。通過理解並有效使用盒模型，你可以更靈活地控制網頁的佈局和設計。
+
+---
+## 選擇器
+用來選擇 HTML 文件中的元素並應用樣式。選擇器的種類很多，可以根據元素的類型、屬性、狀態等來選擇元素。以下是一些常見的 CSS 選擇器：
+
+### 1. 基本選擇器
+
+- **元素選擇器（Element Selector）**
+  - 描述: 選擇特定的 HTML 元素。
+  - 範例:
+    ```css
+    p {
+        color: blue;
+    }
+    ```
+    這將使所有 `<p>` 元素的文字變為藍色。
+
+- **類選擇器（Class Selector）**
+  - 描述: 選擇特定類別的元素，使用 `.` 開頭。
+  - 範例:
+    ```css
+    .myClass {
+        font-size: 20px;
+    }
+    ```
+    這將使所有帶有 `class="myClass"` 的元素字體大小為 20px。
+
+- **ID 選擇器（ID Selector）**
+  - 描述: 選擇具有特定 ID 的元素，使用 `#` 開頭。
+  - 範例:
+    ```css
+    #myId {
+        background-color: yellow;
+    }
+    ```
+    這將使 ID 為 `myId` 的元素背景色變為黃色。
+
+### 2. 群組選擇器（Group Selector）
+
+- **描述**: 將多個選擇器組合在一起，對它們應用相同的樣式。
+- **範例**:
+  ```css
+  h1, h2, h3 {
+      color: green;
+  }
+  ```
+  這將使所有 `<h1>`、`<h2>` 和 `<h3>` 元素的文字變為綠色。
+
+### 3. 後代選擇器（Descendant Selector）
+
+- **描述**: 選擇某個元素內的所有指定後代元素。
+- **範例**:
+  ```css
+  div p {
+      color: red;
+  }
+  ```
+  這將使所有位於 `<div>` 元素內的 `<p>` 元素的文字變為紅色。
+
+### 4. 子選擇器（Child Selector）
+
+- **描述**: 選擇直接位於某個元素內的子元素。
+- **範例**:
+  ```css
+  ul > li {
+      list-style-type: none;
+  }
+  ```
+  這將去掉所有直接位於 `<ul>` 元素內的 `<li>` 元素的項目符號。
+
+### 5. 相鄰兄弟選擇器（Adjacent Sibling Selector）
+
+- **描述**: 選擇緊接在某個元素後面的兄弟元素。
+- **範例**:
+  ```css
+  h1 + p {
+      margin-top: 0;
+  }
+  ```
+  這將使緊接在 `<h1>` 標籤後面的 `<p>` 元素的上邊距為 0。
+
+### 6. 通用兄弟選擇器（General Sibling Selector）
+
+- **描述**: 選擇某個元素後面所有兄弟元素。
+- **範例**:
+  ```css
+  h1 ~ p {
+      color: gray;
+  }
+  ```
+  這將使所有在 `<h1>` 後面的 `<p>` 元素文字顏色變為灰色。
+
+### 7. 屬性選擇器（Attribute Selector）
+
+- **描述**: 選擇具有特定屬性的元素，或者屬性值等於特定值的元素。
+- **範例**:
+  ```css
+  a[target="_blank"] {
+      color: orange;
+  }
+  ```
+  這將使所有 `target="_blank"` 的 `<a>` 元素的文字顏色變為橙色。
+
+### 8. 偽類選擇器（Pseudo-Class Selector）
+
+- **描述**: 選擇某些處於特定狀態的元素。
+- **範例**:
+  ```css
+  a:hover {
+      text-decoration: underline;
+  }
+  ```
+  這將使當滑鼠懸停在 `<a>` 元素上時，文字加下劃線。
+
+- **常見的偽類**:
+  - `:hover` — 滑鼠懸停時
+  - `:focus` — 元素獲得焦點時
+  - `:nth-child(n)` — 選擇第 n 個子元素
+  - `:first-child` — 選擇第一個子元素
+  - `:last-child` — 選擇最後一個子元素
+
+### 9. 偽元素選擇器（Pseudo-Element Selector）
+
+- **描述**: 選擇並樣式化某些元素的一部分。
+- **範例**:
+  ```css
+  p::first-line {
+      font-weight: bold;
+  }
+  ```
+  這將使所有 `<p>` 元素的第一行文字加粗。
+
+- **常見的偽元素**:
+  - `::before` — 在元素內容前插入內容
+  - `::after` — 在元素內容後插入內容
+  - `::first-line` — 選擇第一行文字
+  - `::first-letter` — 選擇第一個字母
+
+### 10. 結合選擇器
+
+- **描述**: 將多種選擇器結合使用，以更精確地選擇元素。
+- **範例**:
+  ```css
+  div.content p.highlight {
+      color: purple;
+  }
+  ```
+  這將使所有位於 `class="content"` 的 `<div>` 元素內，且 `class="highlight"` 的 `<p>` 元素文字顏色變為紫色。
+
+### 11. 屬性值選擇器
+
+- **描述**: 選擇具有特定屬性值模式的元素。
+- **範例**:
+  ```css
+  a[href^="https"] {
+      color: green;
+  }
+  ```
+  這將使所有 `href` 屬性以 `"https"` 開頭的 `<a>` 元素文字顏色變為綠色。
+
+### 總結
+
+CSS 選擇器提供了多種方式來精確地選擇和樣式化 HTML 元素。透過結合使用基本選擇器、複合選擇器以及偽類偽元素選擇器，你可以為網頁中的不同部分應用具體的樣式，從而達到所需的設計效果。
+
+---
+## 單位
+在 CSS 中，單位用來指定元素的尺寸、間距、字體大小等屬性的值。這些單位可以分為絕對單位和相對單位兩大類。
+
+### 絕對單位
+
+**絕對單位**表示固定的、不可變的尺寸，無論環境如何，它們的值都不會改變。這些單位適合用於打印或需要精確測量的情況，但在不同設備上可能導致適應性差。
+
+#### 常見的絕對單位：
+
+1. **`px`（像素）**
+   - 定義: 顯示器上的單一點。1px 代表屏幕上最小的單位。
+   - 範例: 
+     ```css
+     p {
+         font-size: 16px;
+     }
+     ```
+   - 使用場景: 適合於需要精確控制元素大小的情況，如細微的圖形設計。
+
+2. **`pt`（點）**
+   - 定義: 通常用於打印媒體，1pt 等於 1/72 英寸。
+   - 範例: 
+     ```css
+     h1 {
+         font-size: 24pt;
+     }
+     ```
+   - 使用場景: 適合於打印樣式，與字體排版有關。
+
+3. **`in`（英寸）、`cm`（厘米）、`mm`（毫米）**
+   - 定義: 這些單位基於物理尺寸，1英寸 = 2.54 厘米 = 25.4 毫米。
+   - 範例:
+     ```css
+     div {
+         width: 2in;
+         height: 5cm;
+     }
+     ```
+   - 使用場景: 適合於需要特定物理尺寸的情況，如打印佈局設計。
+
+### 相對單位
+
+**相對單位**根據上下文（如父元素、視口尺寸等）來計算，因此它們在不同設備和環境下可以自適應。
+
+#### 常見的相對單位：
+
+1. **`em` 和 `rem`**
+   - **`em`**: 相對於當前元素的字體大小。
+     - 範例: 
+       ```css
+       p {
+           font-size: 1.5em; /* 相當於當前字體大小的 1.5 倍 */
+       }
+       ```
+     - 使用場景: 常用於字體大小或間距的設置，使得設計具有更好的可擴展性。
+   
+   - **`rem`**: 相對於根元素 `<html>` 的字體大小。
+     - 範例:
+       ```css
+       body {
+           font-size: 16px;
+       }
+       h1 {
+           font-size: 2rem; /* 相當於根元素字體大小的 2 倍 */
+       }
+       ```
+     - 使用場景: 與 `em` 類似，但不受父元素影響，適合統一設置全局字體大小或間距。
+
+2. **`%`（百分比）**
+   - 定義: 相對於父元素的尺寸或當前上下文。
+   - 範例:
+     ```css
+     div {
+         width: 50%;
+     }
+     ```
+   - 使用場景: 常用於設置相對於父元素的寬度或高度，使佈局具有流動性。
+
+3. **`vw`（視口寬度）和 `vh`（視口高度）**
+   - **`vw`**: 1vw 相當於視口寬度的 1%。
+   - **`vh`**: 1vh 相當於視口高度的 1%。
+   - 範例:
+     ```css
+     div {
+         width: 50vw; /* 寬度為視口寬度的 50% */
+         height: 50vh; /* 高度為視口高度的 50% */
+     }
+     ```
+   - 使用場景: 適合於需要基於屏幕大小進行調整的元素設計，如全屏背景或動態佈局。
+
+4. **`vmin` 和 `vmax`**
+   - **`vmin`**: 取視口寬度和高度的最小值。
+   - **`vmax`**: 取視口寬度和高度的最大值。
+   - 範例:
+     ```css
+     div {
+         font-size: 5vmin; /* 字體大小為視口最小邊長的 5% */
+     }
+     ```
+   - 使用場景: 當需要根據視口的最小或最大尺寸進行設計時使用，保證了元素比例在各種設備上保持一致。
+
+5. **`ch`**
+   - 定義: 相對於元素的字體中數字“0”的寬度。
+   - 範例:
+     ```css
+     p {
+         width: 60ch; /* 設置段落寬度為60個“0”字的寬度 */
+     }
+     ```
+   - 使用場景: 通常用於設置文本區域的寬度，以確保良好的可讀性。
+
+6. **`ex`**
+   - 定義: 相對於字體中小寫字母“x”的高度。
+   - 範例:
+     ```css
+     p {
+         line-height: 2ex;
+     }
+     ```
+   - 使用場景: 不常用，但有時用於設置行高或垂直對齊。
+
+### 總結
+
+- **絕對單位**：精確且固定，適合於打印和精確設計，但缺乏靈活性。
+- **相對單位**：根據上下文或視口大小進行調整，適合於響應式設計，提供更好的適應性和靈活性。
+
+在網頁設計中，通常會使用相對單位來確保不同設備上的一致性和可讀性，但在某些需要精確控制的情況下，絕對單位也非常有用。
+
+---
+## 字型
+CSS 中的 `font` 屬性用來設置文本的字體樣式，包括字體家族、字體大小、字體粗細、字體樣式等。通過理解和使用這些屬性，你可以控制網頁中的文本顯示效果。
+
+### 常見的 `font` 屬性
+
+1. **`font-family`**  
+   - 定義: 指定文本的字體家族。
+   - 語法: 
+     ```css
+     font-family: "Helvetica", "Arial", sans-serif;
+     ```
+   - 說明: 
+     - 可以指定多個字體，瀏覽器會從左到右進行匹配，直到找到可以顯示的字體。
+     - 通常最後一個是通用字體族（如 `serif`, `sans-serif`, `monospace`），以確保當指定字體不可用時，瀏覽器會使用一個替代字體。
+
+2. **`font-size`**  
+   - 定義: 設置字體的大小。
+   - 語法: 
+     ```css
+     font-size: 16px;
+     ```
+   - 常見單位: 
+     - 絕對單位: `px`, `pt`
+     - 相對單位: `em`, `rem`, `%`
+
+3. **`font-weight`**  
+   - 定義: 設置字體的粗細。
+   - 語法: 
+     ```css
+     font-weight: bold;
+     ```
+   - 值:
+     - 預定義值: `normal`, `bold`, `lighter`, `bolder`
+     - 數字值: 100 至 900（如 400 表示正常字重，700 表示粗體）
+
+4. **`font-style`**  
+   - 定義: 設置字體的樣式。
+   - 語法: 
+     ```css
+     font-style: italic;
+     ```
+   - 值:
+     - `normal` (正常字體)
+     - `italic` (斜體)
+     - `oblique` (傾斜字體)
+
+5. **`font-variant`**  
+   - 定義: 設置字體的變體顯示形式，如小型大寫字母。
+   - 語法: 
+     ```css
+     font-variant: small-caps;
+     ```
+   - 值: 
+     - `normal`
+     - `small-caps` (顯示為小型大寫字母)
+
+6. **`line-height`**  
+   - 定義: 設置行高，控制行與行之間的距離。
+   - 語法: 
+     ```css
+     line-height: 1.5;
+     ```
+   - 說明: 可以使用數字、百分比、絕對或相對單位，數字是基於 `font-size` 的倍數。
+
+### 綜合使用：`font` 簡寫屬性
+
+CSS 提供了一個簡寫屬性 `font`，用來同時設置 `font-style`, `font-variant`, `font-weight`, `font-size`, `line-height`, 和 `font-family`。
+
+- 語法: 
+  ```css
+  font: italic small-caps bold 16px/1.5 "Helvetica", "Arial", sans-serif;
+  ```
+  - 順序要求：`font-style`, `font-variant`, `font-weight`, `font-size/line-height`, `font-family`
+  - `font-size` 和 `font-family` 是必須的，其他屬性是可選的。
+
+### 字體家族類型
+
+- **`serif`**: 有襯線字體，字母結尾有裝飾線。如 Times New Roman。
+- **`sans-serif`**: 無襯線字體，字母結尾無裝飾線。如 Arial, Helvetica。
+- **`monospace`**: 等寬字體，每個字符的寬度相同。如 Courier New。
+- **`cursive`**: 手寫體字體，呈現連筆書寫風格。如 Comic Sans MS。
+- **`fantasy`**: 幻想字體，用於特效或特殊情況。如 Impact。
+
+### 字體嵌入
+
+你可以使用 @font-face 來嵌入自定義字體：
+
+```css
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('mycustomfont.woff2') format('woff2'),
+         url('mycustomfont.woff') format('woff');
+}
+```
+
+然後你可以這樣使用這個字體：
+
+```css
+body {
+    font-family: 'MyCustomFont', sans-serif;
+}
+```
+
+### 總結
+
+- **`font-family`** 定義字體家族，選擇合適的字體。
+- **`font-size`** 設置字體大小，影響文本的可讀性。
+- **`font-weight`** 控制字體粗細，增強文本強調效果。
+- **`font-style`** 設置斜體或傾斜字體，增添設計元素。
+- **`line-height`** 控制行間距，提升文本的易讀性。
+
+透過靈活運用這些屬性，你可以設計出美觀、易讀的網頁文本。
+
+---
+## 內容文字
+
+在 CSS 中，`text` 屬性用於控制文本的顯示方式和排版樣式。這些屬性涵蓋了文本對齊、文本裝飾、字母間距、行高等多個方面。以下是一些常用的 CSS `text` 屬性及其用法：
+
+### 1. `text-align`
+- **定義**: 設置文本在其包含塊中的水平對齊方式。
+- **語法**:
+  ```css
+  text-align: left | right | center | justify;
+  ```
+- **值**:
+  - `left`: 左對齊（預設值）
+  - `right`: 右對齊
+  - `center`: 居中對齊
+  - `justify`: 兩端對齊
+- **範例**:
+  ```css
+  p {
+      text-align: justify;
+  }
+  ```
+  這將使段落文本兩端對齊。
+
+### 2. `text-decoration`
+- **定義**: 設置文本的裝飾效果，如下劃線、刪除線等。
+- **語法**:
+  ```css
+  text-decoration: none | underline | overline | line-through | blink;
+  ```
+- **值**:
+  - `none`: 無裝飾
+  - `underline`: 下劃線
+  - `overline`: 上劃線
+  - `line-through`: 刪除線
+  - `blink`: 閃爍（不建議使用，已被大多數瀏覽器廢棄）
+- **範例**:
+  ```css
+  a {
+      text-decoration: underline;
+  }
+  ```
+  這將為所有連結添加下劃線。
+
+### 3. `text-transform`
+- **定義**: 控制文本的大小寫轉換。
+- **語法**:
+  ```css
+  text-transform: none | capitalize | uppercase | lowercase;
+  ```
+- **值**:
+  - `none`: 不改變大小寫（預設值）
+  - `capitalize`: 每個單詞的首字母大寫
+  - `uppercase`: 全部轉為大寫
+  - `lowercase`: 全部轉為小寫
+- **範例**:
+  ```css
+  h1 {
+      text-transform: uppercase;
+  }
+  ```
+  這將使所有 `<h1>` 標籤的文本全部變為大寫。
+
+### 4. `text-indent`
+- **定義**: 設置段落首行的縮進距離。
+- **語法**:
+  ```css
+  text-indent: length | percentage;
+  ```
+- **值**:
+  - 長度單位（如 `px`, `em`, `rem`）
+  - 百分比（相對於包含塊的寬度）
+- **範例**:
+  ```css
+  p {
+      text-indent: 50px;
+  }
+  ```
+  這將使段落的首行縮進 50px。
+
+### 5. `text-shadow`
+- **定義**: 添加文本陰影效果。
+- **語法**:
+  ```css
+  text-shadow: h-shadow v-shadow blur-radius color;
+  ```
+- **值**:
+  - `h-shadow`: 陰影的水平偏移
+  - `v-shadow`: 陰影的垂直偏移
+  - `blur-radius`: 陰影的模糊半徑（可選）
+  - `color`: 陰影的顏色（可選）
+- **範例**:
+  ```css
+  h2 {
+      text-shadow: 2px 2px 5px gray;
+  }
+  ```
+  這將為 `<h2>` 標籤的文本添加灰色陰影，陰影向右和向下偏移 2px，模糊半徑為 5px。
+
+### 6. `letter-spacing`
+- **定義**: 設置字母之間的間距。
+- **語法**:
+  ```css
+  letter-spacing: normal | length;
+  ```
+- **值**:
+  - `normal`: 預設字母間距
+  - 長度單位（如 `px`, `em`, `rem`）
+- **範例**:
+  ```css
+  p {
+      letter-spacing: 2px;
+  }
+  ```
+  這將使段落中的每個字母之間間隔 2px。
+
+### 7. `word-spacing`
+- **定義**: 設置單詞之間的間距。
+- **語法**:
+  ```css
+  word-spacing: normal | length;
+  ```
+- **值**:
+  - `normal`: 預設單詞間距
+  - 長度單位（如 `px`, `em`, `rem`）
+- **範例**:
+  ```css
+  p {
+      word-spacing: 10px;
+  }
+  ```
+  這將使段落中的每個單詞之間間隔 10px。
+
+### 8. `line-height`
+- **定義**: 設置行高，控制行與行之間的距離。
+- **語法**:
+  ```css
+  line-height: normal | number | length | percentage;
+  ```
+- **值**:
+  - `normal`: 預設行高（通常是字體大小的 1.2 倍）
+  - 數字: 基於字體大小的倍數（如 `1.5` 表示 1.5 倍行高）
+  - 長度單位（如 `px`, `em`, `rem`）
+  - 百分比（相對於字體大小）
+- **範例**:
+  ```css
+  p {
+      line-height: 1.5;
+  }
+  ```
+  這將設置段落的行高為字體大小的 1.5 倍。
+
+### 9. `text-overflow`
+- **定義**: 指定當文本溢出其包含塊時的處理方式。
+- **語法**:
+  ```css
+  text-overflow: clip | ellipsis;
+  ```
+- **值**:
+  - `clip`: 裁剪文本（不顯示溢出的部分）
+  - `ellipsis`: 用省略號表示溢出的文本
+- **範例**:
+  ```css
+  .text-container {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+  }
+  ```
+  這將使溢出容器的文本用省略號表示（需要配合 `white-space: nowrap` 和 `overflow: hidden`）。
+
+### 10. `white-space`
+- **定義**: 設置如何處理文本中的空白符號和換行。
+- **語法**:
+  ```css
+  white-space: normal | nowrap | pre | pre-line | pre-wrap;
+  ```
+- **值**:
+  - `normal`: 合併空白符，並允許自動換行（預設值）
+  - `nowrap`: 合併空白符，不允許自動換行
+  - `pre`: 保留所有空白符和換行符
+  - `pre-line`: 合併空白符，保留換行符
+  - `pre-wrap`: 保留所有空白符，允許自動換行
+- **範例**:
+  ```css
+  p {
+      white-space: nowrap;
+  }
+  ```
+  這將使段落文本不自動換行。
+
+### 11. `direction` 和 `unicode-bidi`
+- **定義**: 控制文本的書寫方向和雙向文本的顯示方式。
+- **語法**:
+  ```css
+  direction: ltr | rtl;
+  unicode-bidi: normal | embed | bidi-override;
+  ```
+- **值**:
+  - `direction: ltr`: 從左到右書寫（預設值）
+  - `direction: rtl`: 從右到左書寫
+  - `unicode-bidi: normal`: 不改變文本方向（預設值）
+  - `unicode-bidi: embed`: 嵌入文本，使用元素的方向
+  - `unicode-bidi: bidi-override`: 覆蓋文本的內部方向
+- **範例**:
+  ```css
+  p {
+      direction: rtl;
+      unicode-bidi: bidi-override;
+  }
+  ```
+  這將使段落文本從右到左書寫並覆蓋內部的文本方向。
+
+### 總結
+
+CSS 的 `text` 屬性提供了豐富的工具來控制文本的顯示和排版。透過合理使用這些屬性，你可以創建出既美觀又具有可讀性的文本排版，增強整體網頁設計效果。
